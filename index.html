@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>大摆锤 3D 演示 · Three.js</title>
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <!--
+    通过 importmap 引入 Three.js 及其 OrbitControls 插件（CDN，MIT 协议，可商用）。
+    离线环境可把 node_modules/three 下载到本地后修改这里的映射地址。
+  -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- ========== 顶部标题栏 ========== -->
+  <header class="top-bar">
+    <h1>大摆锤（Pendulum Ride）3D 结构演示</h1>
+    <span class="sub-title">鼠标左键旋转 · 滚轮缩放 · 右键平移 · 点击部件查看讲解</span>
+  </header>
+
+  <!-- ========== 3D 渲染画布容器 ========== -->
+  <main id="scene-container"></main>
+
+  <!-- ========== 左下：控制面板 ========== -->
+  <section class="panel control-panel" aria-label="演示控制面板">
+    <h2>演示控制</h2>
+
+    <!-- 播放 / 暂停 / 复位 -->
+    <div class="btn-row">
+      <button id="btn-play" class="btn btn-primary" type="button">▶ 播放</button>
+      <button id="btn-pause" class="btn" type="button">⏸ 暂停</button>
+      <button id="btn-reset" class="btn" type="button">⟲ 复位</button>
+    </div>
+
+    <!-- 速度调节 -->
+    <div class="slider-block">
+      <label for="speed-slider">
+        运转速度倍率：<span id="speed-value">1.0×</span>
+      </label>
+      <input id="speed-slider" type="range" min="0.2" max="2.5" step="0.1" value="1" />
+    </div>
+
+    <!-- 实体 / 线框透视 -->
+    <div class="btn-row">
+      <button id="btn-wireframe" class="btn" type="button" aria-pressed="false">
+        透视线框模式：关
+      </button>
+    </div>
+
+    <!-- 天气切换 -->
+    <div class="weather-block">
+      <h3>天气切换</h3>
+      <div class="btn-row">
+        <button class="btn btn-weather active" data-weather="sunny" type="button">☀ 晴天</button>
+        <button class="btn btn-weather" data-weather="night" type="button">☾ 夜晚</button>
+        <button class="btn btn-weather" data-weather="rain" type="button">☂ 雨天</button>
+      </div>
+    </div>
+
+    <!-- 相机复位 -->
+    <div class="btn-row">
+      <button id="btn-camera" class="btn" type="button">相机视角复位</button>
+    </div>
+  </section>
+
+  <!-- ========== 右侧：部件标注与讲解面板 ========== -->
+  <aside id="part-panel" class="panel part-panel" aria-label="部件讲解面板">
+    <!-- 默认目录视图 -->
+    <div id="part-list-view">
+      <h2>部件标注与讲解</h2>
+      <p class="hint">点击下方目录，或直接在 3D 场景中点击设备部件查看介绍。</p>
+      <ul id="part-list"></ul>
+    </div>
+
+    <!-- 部件详情视图（点击后显示） -->
+    <div id="part-detail-view" hidden>
+      <button id="btn-back" class="btn btn-back" type="button">← 返回部件目录</button>
+      <h2 id="detail-title"></h2>
+      <p id="detail-desc"></p>
+      <h3>结构与功能要点</h3>
+      <ul id="detail-points"></ul>
+    </div>
+  </aside>
+
+  <!-- ========== 左上：实时状态 HUD ========== -->
+  <div id="hud" class="hud">
+    <div>状态：<span id="hud-state">暂停</span></div>
+    <div>当前摆角：<span id="hud-angle">0.0°</span></div>
+    <div>速度倍率：<span id="hud-speed">1.0×</span></div>
+  </div>
+
+  <!-- 主入口模块 -->
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

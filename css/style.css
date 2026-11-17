@@ -1,0 +1,281 @@
+/* ============================================================
+   大摆锤 3D 演示 · 全局样式（中文 UI）
+   ============================================================ */
+
+:root {
+  --panel-bg: rgba(18, 24, 38, 0.82);
+  --panel-border: rgba(120, 160, 220, 0.25);
+  --text-main: #eaf0fb;
+  --text-dim: #9fb0cc;
+  --accent: #4da3ff;
+  --accent-2: #ffb347;
+  --btn-bg: rgba(255, 255, 255, 0.08);
+  --btn-hover: rgba(255, 255, 255, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+  background: #0b1020;
+  color: var(--text-main);
+  user-select: none;
+}
+
+/* 3D 画布占满整个窗口 */
+#scene-container {
+  position: fixed;
+  inset: 0;
+}
+
+#scene-container canvas {
+  display: block;
+}
+
+/* ---------------- 顶部标题栏 ---------------- */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  padding: 10px 22px;
+  background: linear-gradient(180deg, rgba(8, 12, 24, 0.85), rgba(8, 12, 24, 0));
+  pointer-events: none;
+}
+
+.top-bar h1 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.sub-title {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+/* ---------------- 通用玻璃面板 ---------------- */
+.panel {
+  position: fixed;
+  z-index: 15;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  padding: 16px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+.panel h2 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  border-left: 4px solid var(--accent);
+  padding-left: 8px;
+}
+
+.panel h3 {
+  font-size: 13px;
+  color: var(--accent-2);
+  margin: 14px 0 6px;
+}
+
+/* ---------------- 左下控制面板 ---------------- */
+.control-panel {
+  left: 18px;
+  bottom: 18px;
+  width: 286px;
+}
+
+.btn-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  flex: 1;
+  min-width: 78px;
+  padding: 8px 10px;
+  font-size: 13px;
+  color: var(--text-main);
+  background: var(--btn-bg);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+}
+
+.btn:hover {
+  background: var(--btn-hover);
+  border-color: var(--accent);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: rgba(77, 163, 255, 0.25);
+  border-color: var(--accent);
+}
+
+.btn.active {
+  background: rgba(77, 163, 255, 0.35);
+  border-color: var(--accent);
+}
+
+.btn.wireframe-on {
+  background: rgba(255, 179, 71, 0.25);
+  border-color: var(--accent-2);
+}
+
+/* 速度滑块 */
+.slider-block {
+  margin-bottom: 12px;
+}
+
+.slider-block label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+#speed-slider {
+  width: 100%;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.weather-block h3 {
+  margin-top: 4px;
+}
+
+/* ---------------- 右侧部件讲解面板 ---------------- */
+.part-panel {
+  right: 18px;
+  top: 64px;
+  bottom: 18px;
+  width: 330px;
+  overflow-y: auto;
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+#part-list {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+}
+
+#part-list li {
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  border-radius: 8px;
+  background: var(--btn-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+#part-list li:hover {
+  background: var(--btn-hover);
+  border-color: var(--accent);
+}
+
+#part-list li .part-index {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #08101f;
+  font-weight: bold;
+  margin-right: 8px;
+  font-size: 12px;
+}
+
+/* 详情视图 */
+.btn-back {
+  flex: none;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+#detail-title {
+  font-size: 18px;
+  color: var(--accent-2);
+  margin: 4px 0 10px;
+}
+
+#detail-desc {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--text-main);
+}
+
+#detail-points {
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--text-dim);
+}
+
+#detail-points li::marker {
+  color: var(--accent);
+}
+
+/* ---------------- 左上状态 HUD ---------------- */
+.hud {
+  position: fixed;
+  left: 18px;
+  top: 64px;
+  z-index: 15;
+  padding: 10px 14px;
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--text-main);
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+  min-width: 150px;
+}
+
+.hud span {
+  color: var(--accent-2);
+  font-weight: bold;
+}
+
+/* 移动端适配：面板收窄 */
+@media (max-width: 760px) {
+  .part-panel {
+    width: 260px;
+  }
+  .control-panel {
+    width: 250px;
+  }
+  .sub-title {
+    display: none;
+  }
+}
